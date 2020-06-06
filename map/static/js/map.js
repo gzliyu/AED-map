@@ -19,6 +19,10 @@ L.tileLayer(
       "pk.eyJ1IjoiZ3psaXl1IiwiYSI6ImNrOGg4NmpzejA5cjkzcXJ5emhtM3h1N3cifQ.P_C43vvgi7Wqyg63tk_Bsw",
   }
 ).addTo(map);
+map.locate({
+  setView: true,
+  maxZoom: 16,
+});
 
 // var loadData = function () {
 //   $.ajax(
@@ -55,7 +59,6 @@ var locate = function () {
     setView: true,
     maxZoom: 16,
   });
-
   map.on("locationfound", function (e) {
     var radius = e.accuracy / 2;
     L.marker(e.latlng).addTo(map).bindPopup("你就在这个圈内");
