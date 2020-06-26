@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>AED map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/static/css/flat-ui.min.css" />
+  <link rel="stylesheet" href="/static/css/leaflet.css" />
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12" id="mapDiv" style="position: absolute; top: 0px; bottom: 0; z-index: 1;"></div>
+      <!-- 地图面板 -->
+      <!--底部状态栏部分 -->
+    </div>
+
+    <button type="button" onclick="route()">find route</button>
+  </div>
+</body>
+
+<script src="/static/lib/jquery-3.5.1.min.js"></script>
+<script src="/static/lib/flat-ui.js"></script>
+<script src="/static/lib/leaflet.js"></script>
+<script src="/static/lib/urlTemplate.js"></script>
+<script>
+  var LocateIcon = L.icon({
+    iconUrl: "/static/img/locateicon.png",
+    //   shadowUrl: "leaf-shadow.png",
+
+    iconSize: [38, 95], // size of the icon
+    shadowSize: [50, 64], // size of the shadow
+    iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62], // the same for the shadow
+    popupAnchor: [-3, -76], // point from which the popup should open relative to the iconAnchor
+  });
+</script>
+<script src="/static/js/map.js"></script>
+
+</html>

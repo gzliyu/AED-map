@@ -26,12 +26,18 @@ SECRET_KEY = 'z8^5^hy^^rx@ve*ac$xe@vjq1=!6o6t+fhgzxxq^(hjhed=uef'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
+# 设置可跨域范围
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 
 INSTALLED_APPS = [
     'login',
+    'm',
+    'aedmap',
+    'map',
+    # cors
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,6 +54,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 定义跨域中间件
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'aedmap.urls'
