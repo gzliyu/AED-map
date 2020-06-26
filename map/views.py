@@ -9,3 +9,7 @@ def index(request, pos):
         'lot': 23,
         'host_url': 'http://127.0.0.1:8000/m/',
     })
+
+
+def route(request):
+    return render(request, "map/route.html")

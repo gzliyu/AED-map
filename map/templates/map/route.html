@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AED Map</title>
+</head>
+
+<body>
+    {% include 'nav.html' %}
+    {% block content %}
+    <div>
+        <!DOCTYPE html>
+        <html>
+
+        <head>
+            <title>{% block title %}默认标题{% endblock %}</title>
+        </head>
+
+        <body> {% include 'nav.html' %} {% block content %}
+            <div>
+                <script src="/static/js/load.js"></script>
+            </div>
+        </body>
+
+        </html>
+    </div>
+    {% endblock %}
+
+</body>
+
+</html>
