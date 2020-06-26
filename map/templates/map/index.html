@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>AED map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="/static/js/application.js"></script>
+  <script src="/static/lib/jquery-3.5.1.min.js"></script>
+  <script src="/static/lib/flat-ui.js"></script>
+  <script src="/static/lib/leaflet.js"></script>
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/static/css/flat-ui.min.css" />
+  <link rel="stylesheet" href="/static/css/leaflet.css" />
+
+  <link rel="stylesheet" media="screen" href="/static/css/screen-ltr.css">
+  <link rel="stylesheet" media="print" href="/static/css/print-ltr.css">
+  <link rel="stylesheet" media="screen, print" href="/static/css/leaflet-all.css">
+  <!-- 上面的js基本不用管（都是抄来的） -->
+
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12" id="mapDiv" style="position: absolute; top: 0px; bottom: 0; z-index: 1;"></div>
+      <!-- 地图初始化 -->
+      <!-- <script>
+        // 设置leaflet的地图样式
+        // 坐标系：wgs84，
+        // setView：初始化时地图中心，第二个参数是缩放比例
+        const map = L.map("mapDiv", {
+          crs: L.CRS.EPSG3857,
+          zoomControl: true,
+          minZoom: 1,
+          attributionControl: true,
+          zoomAnimation: true, //缩放是否带动画
+        }).setView([23.13,113.27], 12);
+      
+        var mapbox_url =
+          "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}";
+      
+        L.tileLayer(mapbox_url, {
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: "mapbox/streets-v11",
+          tileSize: 512,
+          zoomOffset: -1,
+          accessToken:
+            "pk.eyJ1IjoiZ3psaXl1IiwiYSI6ImNrOGg4NmpzejA5cjkzcXJ5emhtM3h1N3cifQ.P_C43vvgi7Wqyg63tk_Bsw",
+        }).addTo(map);
+        // alert("Hello!");
+        var locate = function () {
+          var options = {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0,
+          };
+        }
+      </script> -->
+      <!-- 地图面板 -->
+      <!--底部状态栏部分 -->
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12" id="mapDiv" style="position: absolute; top: 0px; bottom: 0; z-index: 1;"></div>
+      <!-- 地图面板 -->
+      <!--底部状态栏部分 -->
+    </div>
+  </div>
+  <div id="map-ui" style="display: none;">
+    <div class="layers-ui" style="">
+      <div class="sidebar_heading"><span class="icon close" onlick="closeSidebar()">关闭</span>
+        <h4>图层</h4>
+      </div>
+      <div class="section base-layers">
+        <ul class="list-unstyled">
+          <li>
+            <div class="leaflet-container leaflet-retina leaflet-fade-anim" style="position: relative;">
+              <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);">
+                <div class="leaflet-pane leaflet-tile-pane">
+                  <div class="leaflet-layer " style="z-index: 1; opacity: 1;">
+                    <div class="leaflet-tile-container leaflet-zoom-animated"
+                      style="z-index: 19; transform: translate3d(0px, 0px, 0px) scale(1);"><img alt=""
+                        role="presentation" src="/static/img/timg.jpg" class="leaflet-tile"
+                        style="width: 256px; height: 256px; transform: translate3d(90px, -67px, 0px); opacity: 1;"><img
+                        alt="" role="presentation" src="/static/img/timg.jpg" class="leaflet-tile"
+                        style="width: 256px; height: 256px; transform: translate3d(346px, -67px, 0px); opacity: 1;"><img
+                        alt="" role="presentation" src="/static/img/timg.jpg" class="leaflet-tile"
+                        style="width: 256px; height: 256px; transform: translate3d(-166px, -67px, 0px); opacity: 1;"><img
+                        alt="" role="presentation" src="/static/img/timg.jpg" class="leaflet-tile"
+                        style="width: 256px; height: 256px; transform: translate3d(602px, -67px, 0px); opacity: 1;">
+                    </div>
+                  </div>
+                </div>
+                <div class="leaflet-pane leaflet-shadow-pane"></div>
+                <div class="leaflet-pane leaflet-overlay-pane"></div>
+                <div class="leaflet-pane leaflet-marker-pane"></div>
+                <div class="leaflet-pane leaflet-tooltip-pane"></div>
+                <div class="leaflet-pane leaflet-popup-pane"></div>
+                <div class="leaflet-proxy leaflet-zoom-animated"
+                  style="transform: translate3d(1.70878e+06px, 909660px, 0px) scale(4096);"></div>
+              </div>
+              <div class="leaflet-control-container">
+                <div class="leaflet-top leaflet-left"></div>
+                <div class="leaflet-top leaflet-right"></div>
+                <div class="leaflet-bottom leaflet-left"></div>
+                <div class="leaflet-bottom leaflet-right"></div>
+              </div>
+              <div class="leaflet-contextmenu" style="z-index: 10000; position: absolute;"></div>
+            </div><label><input type="radio">标准</label>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="leaflet-control-container">
+    <script src="/static/js/map.js"></script>
+    <div class="leaflet-top leaflet-right">
+      <div class="leaflet-control control-locate" onclick="geolocate()">
+        <a class="control-button" title href="#" data-original-title="显示我的位置">
+          <span class="icon geolocate"></span>
+        </a>
+        <script>
+          function geolocate() {
+            var options = {
+              enableHighAccuracy: true,
+              timeout: 5000,
+              maximumAge: 0,
+            };
+
+            function success(pos) {
+              var crd = pos.coords;
+              L.circleMarker([crd.latitude, crd.longitude])
+                .addTo(map)
+                .bindPopup("You are here!");
+              L.circle([crd.latitude, crd.longitude], crd.accuracy / 2).addTo(map);
+              map.panTo([crd.latitude, crd.longitude], {
+                animate: true,
+              });
+              return crd;
+            }
+
+            function error(err) {
+              console.warn("ERROR(" + err.code + "): " + err.message);
+              return [0, 0];
+            }
+            navigator.geolocation.getCurrentPosition(success, error, options);
+          }
+        </script>
+      </div>
+      <div class="control-layers leaflet-control">
+        <div class="control-button" href="#" onclick="setLayers()" title data-original-title="图层">
+          <span class="icon layers"></span>
+        </div>
+      </div>
+      <div class="control-query leaflet-control">
+        <a class="control-button" href="#" onclick="route()" data-original-title="寻找最近的AED设备">
+          <span class="icon key"></span>
+        </a>
+        <script>
+          function route() {
+            locate_Lat = 23.12
+            locate_Lng = 113.23
+            let request_url =
+              'http://127.0.0.1:8000/m/route/{"type": "FindRoute",' +
+              '"Lat":' +
+              locate_Lat +
+              ', "Place": "hhhhhhh", "Lng":' +
+              locate_Lng +
+              "}";
+              alert(request_url)
+              L.circleMarker([locate_Lat, locate_Lng])
+                .addTo(map)
+                .bindPopup("You are here!");
+            $.ajax({
+              type: "GET",
+              url: request_url,
+              dataType: "json",
+              success: function (response) {
+                var res = response.objects;
+                res.forEach((point, index, res) => {
+                  var place = point["Place"];
+                  var aed_Lat = point["Lat"];
+                  var aed_Lng = point["Lng"];
+                  var duration = point["Route"]["duration"];
+                  L.marker([aed_Lng,aed_Lat], { icon: LocateIcon }).addTo(map);
+                  L.polyline(point["Route"]["steps"], { color: "blue" })
+                    .addTo(map)
+                    .bindPopup(duration);
+                });
+              },
+            });
+          }
+        </script>
+      </div>
+      <div class="leaflet-control control-locate" onclick="loadPosData()">
+        <a class="control-button" title href="#" data-original-title="显示所有的设备">
+          <span class="icon query"></span>
+        </a>
+        <script>
+          var LocateIcon = L.icon({
+          iconUrl: "/static/img/aed.png",
+            //   shadowUrl: "leaf-shadow.png",
+
+            iconSize: [20, 40], // size of the icon
+            shadowSize: [50, 64], // size of the shadow
+            iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62], // the same for the shadow
+            popupAnchor: [-3, -76], // point from which the popup should open relative to the iconAnchor
+          });
+          var loadPosData = function () {
+            Lat = 23.13
+            Lng = 113.27
+            let request_url =
+              'http://127.0.0.1:8000/m/{"type": "NotFindRoute",' +
+              '"Lat":' +
+              Lat +
+              ', "Place": "hhhhhhh", "Lng":' +
+              Lng +
+              "}";
+            // alert(request_url)
+            $.ajax({
+              type: "GET",
+              url: request_url,
+              dataType: "json",
+              success: function (response) {
+                var arr = response.objects;
+                arr.forEach((point, index, arr) => {
+                  var Lat = point["Lat"];
+                  var Lng = point["Lng"];                  
+                  L.marker([Lng,Lat], { icon: LocateIcon }).addTo(map);
+                });
+              },
+            });
+          };
+        </script>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="/static/js/map.js"></script>
+
+
+</html>

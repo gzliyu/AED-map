@@ -13,10 +13,25 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.urls import path
+from django.conf.urls.static import static
 from django.contrib import admin
+from django.conf import settings
 from django.urls import include, path
 
+from . import views
 urlpatterns = [
+    path('', views.index, name="index"),
+    path('blog', views.blog, name="blog"),
+    path('contact-us', views.contactus, name="contact-us"),
+    path('academics', views.academics, name="academics"),
+    path('history', views.history, name="history"),
+    path('privacy-policy', views.privacypolicy, name="privacy-policy"),
+    path('search-results', views.searchresults, name="search-results"),
+    path('tutors', views.tutors, name="tutors"),
     path('admin/', admin.site.urls),
-    path('login/', include("login.urls")),
-]
+    # path('login/', include("login.urls")),
+    path('login/', include('login.urls')),
+    path('m/', include("m.urls")),
+    path('map/', include("map.urls")),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
